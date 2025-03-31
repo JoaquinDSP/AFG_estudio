@@ -107,25 +107,29 @@ h6 {
   font-family: var(--heading-font);
 }
 
-/* Pulsating Play Button */
+/* Contenedor relativo para la imagen */
+.position-relative {
+  position: relative;
+  display: inline-block; /* Evita que el contenedor ocupe más de lo necesario */
+}
+
+/* Botón de reproducción */
 .pulsating-play-btn {
   width: 94px;
   height: 94px;
   background: radial-gradient(circle, var(--accent-color) 50%, rgba(0, 0, 0, 0) 52%);
   border-radius: 50%;
-  display: flex;
+  display:flex;
   align-items: center;
   justify-content: center;
   
-  /* Posicionamiento absoluto dentro del contenedor */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  
+  /* Asegurar que esté por encima de la imagen */
+  z-index: 10;
 }
 
 /* Efecto de pulsación */
-.pulsating-play-btn:before {
+.pulsating-play-btn::before {
   content: "";
   position: absolute;
   width: 120px;
@@ -134,39 +138,34 @@ h6 {
   border: 5px solid rgba(255, 255, 255, 0.3);
   background: transparent;
   
-  /* Corrección del posicionamiento */
+  /* Centrado */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   
-  /* Animación */
   animation: pulsate-play-btn 2s infinite ease-out;
-  opacity: 1;
 }
 
-/* Icono del botón de reproducción */
-.pulsating-play-btn:after {
+/* Icono de reproducción */
+.pulsating-play-btn::after {
   content: "";
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
   width: 0;
   height: 0;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-left: 15px solid #fff;
+  border-top: 12px solid transparent;
+  border-bottom: 12px solid transparent;
+  border-left: 20px solid #fff;
+  
+  /* Centrado */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
   z-index: 100;
   transition: all 0.4s ease-out;
 }
 
-/* Efecto hover */
-.pulsating-play-btn:hover:after {
-  border-left: 15px solid var(--accent-color);
-  transform: translate(-50%, -50%) scale(1.3);
-}
-
-/* Animación del efecto pulsante */
+/* Animación del efecto de pulsación */
 @keyframes pulsate-play-btn {
   0% {
     transform: translate(-50%, -50%) scale(0.6);
@@ -260,7 +259,8 @@ h6 {
 }
 
 .header .logo img {
-  max-height: 70px;
+  max-height: auto;
+  max-width: 100%;
   margin-right: 8px;
 }
 
@@ -1358,6 +1358,8 @@ section,
   border-color: var(--accent-color);
 }
 
+
+
 .appointment .php-email-form input::placeholder,
 .appointment .php-email-form textarea::placeholder,
 .appointment .php-email-form select::placeholder {
@@ -1895,6 +1897,7 @@ section,
 
 .contact .php-email-form input[type=text],
 .contact .php-email-form input[type=email],
+.contact .php-email-form input[type=tel],
 .contact .php-email-form textarea {
   font-size: 14px;
   padding: 10px 15px;
@@ -1905,14 +1908,17 @@ section,
   border-color: color-mix(in srgb, var(--default-color), transparent 80%);
 }
 
+
 .contact .php-email-form input[type=text]:focus,
 .contact .php-email-form input[type=email]:focus,
+.contact .php-email-form input[type=tel]:focus,
 .contact .php-email-form textarea:focus {
   border-color: var(--accent-color);
 }
 
 .contact .php-email-form input[type=text]::placeholder,
 .contact .php-email-form input[type=email]::placeholder,
+.contact .php-email-form input[type=tel]::placeholder,
 .contact .php-email-form textarea::placeholder {
   color: color-mix(in srgb, var(--default-color), transparent 70%);
 }
@@ -2010,7 +2016,13 @@ section,
   line-height: 60px;
   box-shadow: 2px 2px 3px #999;
   text-decoration: none;
+  z-index: 10;
+
 }
+
+
+
+
 
 /*--------------------------------------------------------------
 # Starter Section Section
