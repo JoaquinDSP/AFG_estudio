@@ -180,9 +180,9 @@
       <div class="col-lg-6 align-self-start position-relative" data-aos="fade-up" data-aos-delay="100">
         <div class="video-container position-relative">
           <img src="assets/img/about.jpg" class="img-fluid" alt="Sobre nosotros">
-          <a href="https://youtube.com/shorts/zaxfbbp0DuU" class="pulsating-play-btn" aria-label="Reproducir video">
-            <i class="fa fa-play"></i>
-          </a>
+<a href="#" onclick="abrirVideo(); return false;" class="pulsating-play-btn" aria-label="Reproducir video">
+  <i class="fa fa-play"></i>
+</a>
         </div>
       </div>
       <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
@@ -561,6 +561,40 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+<!-- MODAL CON VÍDEO DE VIMEO (70% ALTO PANTALLA) -->
+<div id="modalVideo" onclick="cerrarVideo(event)" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:999; align-items:center; justify-content:center;">
+  <div style="position:relative; width:90%; max-width:1280px; height:80vh;" onclick="event.stopPropagation();">
+    <iframe id="videoIframe" width="100%" height="100%" frameborder="0" allow="autoplay; fullscreen" allowfullscreen style="border-radius:10px;"></iframe>
+    
+    <!-- Botón cerrar dentro del vídeo -->
+    <button onclick="cerrarVideo()" style="position:absolute; top:6%; right:10px; background:rgba(0,0,0,0.5); color:#fff; border:none; font-size:20px; padding:5px 10px; border-radius:5px; cursor:pointer;">
+      ×
+    </button>
+  </div>
+</div>
+
+
+
+<script>
+  function abrirVideo() {
+    const modal = document.getElementById("modalVideo");
+    const iframe = document.getElementById("videoIframe");
+
+    // Cargamos el vídeo de Vimeo con autoplay y sin controles
+    iframe.src = "https://player.vimeo.com/video/1074127101?h=e9b7bc2e39&autoplay=1&title=0&byline=0&portrait=0&controls=0";
+    modal.style.display = "flex";
+  }
+
+  function cerrarVideo(event) {
+    const modal = document.getElementById("modalVideo");
+    const iframe = document.getElementById("videoIframe");
+
+    // Vaciar el src para detener el vídeo
+    iframe.src = "";
+    modal.style.display = "none";
+  }
+</script>
+
 
 </body>
 

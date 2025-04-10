@@ -2053,9 +2053,10 @@ section,
 
 .about-btn {
   display: inline-block;
-  background-color: transparent; /* Fondo transparente */
-  border: 2px solid #0e1317; /* Borde visible */
-  color: #0e1317; /* Texto oscuro */
+  background-color: #0e1317; /* Fondo transparente */
+  width: 18rem; 
+  border: 2px solid #000000; /* Borde visible */
+  color: aliceblue; /* Texto  */
   padding: 8px 30px;
   border-radius: 5px;
   font-size: 20px;
@@ -2065,10 +2066,13 @@ section,
 }
 
 .about-btn:hover {
-  background-color: #0e1317; /* Fondo morado al pasar el mouse */
-  color: white; /* Texto blanco */
+  background-color: #0e131791; /* Fondo morado al pasar el mouse */
+  color: aliceblue;
   cursor: pointer;
 }
+
+
+
 
 
 
