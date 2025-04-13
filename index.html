@@ -420,8 +420,9 @@
             </div>
           </div>
 
-<!-- ✅ FORMULARIO -->
-<form id="miFormulario" class="php-email-form" action="https://formsubmit.co/agustinfontanagarramuno@hotmail.com" method="POST">
+          <div class="col-lg-6">
+            <!-- ✅ FORMULARIO -->
+<form id="miFormulario" class="php-email-form">
   <div class="row gy-4">
 
     <div class="col-md-6">
@@ -440,9 +441,7 @@
       <textarea class="form-control" name="message" rows="4" placeholder="Mensaje" required></textarea>
     </div>
 
-    <!-- ✅ hCaptcha -->
-    <div class="h-captcha" data-sitekey="1982117c-b424-463c-9d8e-77c612562c1a"></div>
-    <input type="hidden" name="_hcaptcha" value="true">
+    <div class="h-captcha" data-sitekey="ES_bac420c6bad4413a9a6329487d6e9c25"></div>
 
     <div class="col-md-12 text-center">
       <button type="submit">Enviar Consulta</button>
@@ -459,22 +458,53 @@
   </div>
 </div>
 
-<!-- ✅ JS PARA MOSTRAR EL MODAL -->
+
+<!-- ✅ JS PARA INTERCEPTAR Y MOSTRAR EL MODAL -->
 <script>
-  const formulario = document.getElementById("miFormulario");
-  const modal = document.getElementById("modalExito");
+ const formulario = document.getElementById("miFormulario");
+const modal = document.getElementById("modalExito");
 
-  formulario.addEventListener("submit", function () {
-    setTimeout(() => {
-      modal.style.display = "flex"; // Asegurate que modal tenga display:flex para centrar
-    }, 500);
-  });
+formulario.addEventListener("submit", function (e) {
+  e.preventDefault(); // Evita que se recargue la página
 
-  function cerrarModal() {
-    modal.style.display = "none";
+  // Verificar si el hCaptcha está completado
+  const hcaptchaResponse = grecaptcha.getResponse();  // para hCaptcha
+
+  if (hcaptchaResponse.length == 0) {
+    alert("Por favor completa el CAPTCHA");
+    return;
   }
+
+  // Envía el formulario usando fetch
+  fetch("https://joaspretz@gmail.com", {
+    method: "POST",
+    body: new FormData(formulario)
+  })
+  .then(response => {
+    if (response.ok) {
+      modal.style.display = "block"; // Muestra el modal
+      formulario.reset(); // Limpia el formulario
+    }
+  })
+  .catch(error => {
+    alert("Hubo un error al enviar. Intenta de nuevo.");
+  });
+});
+
+function cerrarModal() {
+  modal.style.display = "none";
+}
+
 </script>
 
+            
+          </div><!-- End Contact Form -->
+
+        </div>
+
+      </div>
+
+    </section><!-- /Contact Section -->
 
   </main>
 
@@ -586,7 +616,6 @@
   }
 </script>
 
-<script src="https://hcaptcha.com/1/api.js" async defer></script>
 
 </body>
 
